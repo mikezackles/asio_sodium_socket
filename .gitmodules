@@ -1,0 +1,15 @@
+[submodule "build"]
+	path = build
+	url = git://github.com/mikezackles/gn_build
+[submodule "bundle/core/asio"]
+	path = bundle/core/asio
+	url = git://github.com/chriskohlhoff/asio
+[submodule "bundle/core/gsl"]
+	path = bundle/core/gsl
+	url = git://github.com/Microsoft/GSL
+[submodule "bundle/test/catch"]
+	path = bundle/test/catch
+	url = git://github.com/philsquared/Catch
+[submodule "bundle/core/optional"]
+	path = bundle/core/optional
+	url = git://github.com/akrzemi1/Optional
