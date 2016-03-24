@@ -94,7 +94,8 @@ namespace detail {
       buffer& data
     , public_key const& receiver_public_key
     , private_key const& receiver_private_key
-    ) noexcept {
+    )
+    noexcept {
       handshake_hello_view view{gsl::as_span(data)};
       auto full_span = view.span();
       auto data_span = view.data_span();
@@ -150,17 +151,20 @@ namespace detail {
       );
     }
 
-    void
+    bool
     encrypt_to(public_key const& remote_key) noexcept {
       auto full_span = view_.span();
       auto data_span = view_.data_span();
 
-      crypto_box_seal(
-        &full_span[0]
-      , &data_span[0]
-      , data_span.size()
-      , &remote_key[0]
-      );
+      return
+        crypto_box_seal(
+          &full_span[0]
+        , &data_span[0]
+        , data_span.size()
+        , &remote_key[0]
+        )
+        == 0
+      ;
     }
 
   private:

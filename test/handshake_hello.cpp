@@ -20,7 +20,7 @@ SCENARIO("handshake hello encrypt/decrypt", "[integration]") {
   hello.generate_reply_nonce();
   nonce reply_nonce;
   hello.copy_reply_nonce(reply_nonce);
-  hello.encrypt_to(server_pk);
+  REQUIRE( hello.encrypt_to(server_pk) );
   auto decrypted =
     detail::handshake_hello::decrypt(
       buffer
