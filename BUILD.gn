@@ -8,6 +8,9 @@ config("base") {
   ldflags = [
     "-lsodium",
   ]
+  if (host_os != "mac") {
+    ldflags += [ "-pthread" ]
+  }
   defines = [ "ASIO_SODIUM_TARGET_PLATFORM_$target_os" ]
   cflags = [
   ]
@@ -38,6 +41,7 @@ test_executable("tests") {
     "test/handshake_hello.cpp",
     "test/handshake_response.cpp",
     "test/message_header.cpp",
+    "test/handshake.cpp",
   ]
 }
 
