@@ -44,24 +44,24 @@ namespace detail {
     auto
     buffer() noexcept { return asio::buffer(&view_[0], view_.size()); }
 
-    constexpr auto
+    constexpr public_key_span
     public_key_field() noexcept {
       return view_.subspan<public_key_offset, crypto_box_PUBLICKEYBYTES>();
     }
 
-    constexpr auto
+    constexpr public_key_span const
     public_key_field() const noexcept {
-      return view_.subspan<public_key_offset, crypto_box_PUBLICKEYBYTES>();
+      return const_cast<handshake_hello_view&>(*this).public_key_field();
     }
 
-    constexpr auto
+    constexpr nonce_span
     reply_nonce_field() noexcept {
       return view_.subspan<reply_nonce_offset, crypto_box_NONCEBYTES>();
     }
 
-    constexpr auto
+    constexpr nonce_span const
     reply_nonce_field() const noexcept {
-      return view_.subspan<reply_nonce_offset, crypto_box_NONCEBYTES>();
+      return const_cast<handshake_hello_view&>(*this).reply_nonce_field();
     }
 
   private:

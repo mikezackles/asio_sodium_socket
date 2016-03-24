@@ -4,7 +4,7 @@
 
 using namespace asio_sodium;
 
-SCENARIO("handshake encrypt/decrypt", "[integration]") {
+SCENARIO("handshake hello encrypt/decrypt", "[integration]") {
   detail::handshake_hello::buffer buffer;
   detail::handshake_hello hello{buffer};
 
