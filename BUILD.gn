@@ -8,7 +8,7 @@ config("base") {
   ldflags = [
     "-lsodium",
   ]
-  defines = [ "PEEV_TARGET_PLATFORM_$target_os" ]
+  defines = [ "ASIO_SODIUM_TARGET_PLATFORM_$target_os" ]
   cflags = [
   ]
   if (is_clang) {
@@ -36,6 +36,8 @@ test_executable("tests") {
   sources = [
     "test/main.cpp",
     "test/handshake_hello.cpp",
+    "test/handshake_response.cpp",
+    "test/message_header.cpp",
   ]
 }
 

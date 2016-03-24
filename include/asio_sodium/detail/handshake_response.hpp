@@ -75,7 +75,7 @@ namespace detail {
     using optional = std::experimental::optional<T>;
     using buffer = std::array<byte, buffer_size>;
 
-    constexpr explicit handshake_response(
+    explicit handshake_response(
       buffer& data
     ) noexcept
       : view_(gsl::as_span(data))
