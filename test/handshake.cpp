@@ -23,12 +23,11 @@ SCENARIO("full handshake", "[integration]") {
   detail::session_data server_session{server_pk, server_sk};
 
   asio::io_service io;
-  asio::basic_socket_acceptor<asio::ip::tcp> acceptor{
-    asio::ip::tcp::acceptor{
-      io
-    , asio::ip::tcp::endpoint{asio::ip::tcp::v4(), 58008}
-    }
+  asio::ip::tcp::acceptor acceptor{
+    io
+  , asio::ip::tcp::endpoint{asio::ip::tcp::v4(), 58008}
   };
+
   bool server_success = false;
   bool server_error = false;
   auto server_socket = detail::socket_type(asio::ip::tcp::socket(io));
