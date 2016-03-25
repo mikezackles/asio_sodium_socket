@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../errors.hpp"
 #include "asio_types.hpp"
 #include "handshake_hello.hpp"
 #include "handshake_response.hpp"
@@ -45,15 +46,19 @@ namespace detail {
 
       reenter (this) {
         yield connect();
-        make_hello();
+        ec = make_hello();
+        if (ec) {
+          on_error_(ec);
+          yield break;
+        }
         yield send_hello();
         yield await_hello_response();
-        if (process_hello_response()) {
-          on_success_();
-        } else {
-          // TODO custom error_code (this one is defaulted to indicate no error)
+        ec = process_hello_response();
+        if (ec) {
           on_error_(ec);
+          yield break;
         }
+        on_success_();
       }
     }
 
@@ -62,14 +67,18 @@ namespace detail {
       socket_.async_connect(endpoint_, std::move(*this));
     }
 
-    void
+    std::error_code
     make_hello()
     noexcept {
       handshake_hello hello(session_.hello_buffer);
       hello.set_public_key(session_.local_public_key);
       hello.generate_reply_nonce();
       hello.copy_reply_nonce(session_.decrypt_nonce);
-      hello.encrypt_to(session_.remote_public_key);
+      if (!hello.encrypt_to(session_.remote_public_key)) {
+        return error::handshake_hello_encrypt;
+      } else {
+        return {};
+      }
     }
 
     void
@@ -92,7 +101,7 @@ namespace detail {
       );
     }
 
-    bool
+    std::error_code
     process_hello_response()
     noexcept {
       auto response = handshake_response::decrypt(
@@ -103,13 +112,13 @@ namespace detail {
       );
 
       if (!response) {
-        return false;
+        return error::handshake_response_decrypt;
       }
 
       response->copy_reply_nonce(session_.encrypt_nonce);
       response->copy_followup_nonce(session_.decrypt_nonce);
 
-      return true;
+      return {};
     }
 
     endpoint_type endpoint_;

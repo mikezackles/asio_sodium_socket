@@ -47,11 +47,13 @@ namespace detail {
       reenter (this) {
         yield await_hello();
         // TODO custom error_codes
-        if (!process_hello()) {
+        ec = process_hello();
+        if (ec) {
           on_error_(ec, bytes);
           yield break;
         }
-        if (!make_hello_response()) {
+        ec = make_hello_response();
+        if (ec) {
           on_error_(ec, bytes);
           yield break;
         }
@@ -71,7 +73,7 @@ namespace detail {
       );
     }
 
-    bool
+    std::error_code
     process_hello()
     noexcept {
       auto hello =
@@ -82,12 +84,12 @@ namespace detail {
         )
       ;
       if (!hello) {
-        return false;
+        return error::handshake_hello_decrypt;
       }
       auto public_key = hello->public_key_span();
       // Look up the public key and make sure it's authorized
       if (!authenticator_(public_key)) {
-        return false;
+        return error::handshake_authentication;
       }
       std::copy(
         public_key.begin()
@@ -95,10 +97,10 @@ namespace detail {
       , session_.remote_public_key.begin()
       );
       hello->copy_reply_nonce(session_.encrypt_nonce);
-      return true;
+      return {};
     }
 
-    bool
+    std::error_code
     make_hello_response()
     noexcept {
       handshake_response response{session_.hello_response_buffer};
@@ -118,7 +120,7 @@ namespace detail {
         , session_.local_private_key
         )
       ) {
-        return false;
+        return error::handshake_response_encrypt;
       }
 
       std::copy(
@@ -127,7 +129,7 @@ namespace detail {
       , session_.encrypt_nonce.begin()
       );
 
-      return true;
+      return {};
     }
 
     void
