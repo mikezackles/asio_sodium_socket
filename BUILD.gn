@@ -16,6 +16,7 @@ config("base") {
   ]
   if (is_clang) {
     cflags += [
+      #"-fcolor-diagnostics",
       "-Wno-unused-local-typedef", # asio fix
     ]
   } else if (is_gcc) {
@@ -43,6 +44,7 @@ test_executable("tests") {
     "test/message_header.cpp",
     "test/handshake.cpp",
     "test/read_write.cpp",
+    "test/socket.cpp",
   ]
 }
 
