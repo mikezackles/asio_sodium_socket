@@ -74,6 +74,9 @@ namespace detail {
         return error::message_encrypt;
       }
 
+      nonce temp_followup_nonce;
+      header.copy_followup_nonce(temp_followup_nonce);
+
       if (
         !header.encrypt_to(
           session_.encrypt_nonce
@@ -84,7 +87,11 @@ namespace detail {
         return error::message_header_encrypt;
       }
 
-      header.copy_followup_nonce(session_.encrypt_nonce);
+      std::copy(
+        temp_followup_nonce.begin()
+      , temp_followup_nonce.end()
+      , session_.encrypt_nonce.begin()
+      );
 
       return {};
     }
