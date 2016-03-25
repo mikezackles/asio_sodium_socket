@@ -7,6 +7,11 @@ namespace asio_sodium {
   , handshake_authentication
   , handshake_response_encrypt
   , handshake_response_decrypt
+  , message_header_encrypt
+  , message_header_decrypt
+  , message_too_large
+  , message_encrypt
+  , message_decrypt
   };
 
   class error_category
@@ -29,6 +34,16 @@ namespace asio_sodium {
         return "Couldn't encrypt handshake response";
       case error::handshake_response_decrypt:
         return "Couldn't decrypt handshake response";
+      case error::message_header_encrypt:
+        return "Couldn't encrypt message header";
+      case error::message_header_decrypt:
+        return "Couldn't decrypt message header";
+      case error::message_too_large:
+        return "Message too large";
+      case error::message_encrypt:
+        return "Couldn't encrypt message";
+      case error::message_decrypt:
+        return "Couldn't decrypt message";
       }
     }
   };

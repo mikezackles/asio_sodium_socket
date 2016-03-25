@@ -42,6 +42,7 @@ test_executable("tests") {
     "test/handshake_response.cpp",
     "test/message_header.cpp",
     "test/handshake.cpp",
+    "test/read_write.cpp",
   ]
 }
 
