@@ -44,10 +44,10 @@ namespace detail {
       }
 
       reenter (this) {
-        yield socket_.async_connect(endpoint_, std::move(*this));
+        yield connect();
         make_hello();
-        yield send_hello(socket_, std::move(*this));
-        yield await_hello_response(socket_, std::move(*this));
+        yield send_hello();
+        yield await_hello_response();
         if (process_hello_response()) {
           on_success_();
         } else {
@@ -58,6 +58,10 @@ namespace detail {
     }
 
   private:
+    void connect() {
+      socket_.async_connect(endpoint_, std::move(*this));
+    }
+
     void
     make_hello()
     noexcept {
@@ -68,26 +72,23 @@ namespace detail {
       hello.encrypt_to(session_.remote_public_key);
     }
 
-    template <typename Callback>
     void
-    send_hello(socket_type& socket, Callback&& callback)
+    send_hello()
     noexcept {
       asio::async_write(
-        socket
+        socket_
       , asio::buffer(session_.hello_buffer)
-      , std::forward<Callback>(callback)
+      , std::move(*this)
       );
     }
 
-    template <typename Callback> void
-    await_hello_response(
-      socket_type& socket, Callback&& callback
-    )
+    void
+    await_hello_response()
     noexcept {
       asio::async_read(
-        socket
+        socket_
       , asio::buffer(session_.hello_response_buffer)
-      , std::forward<Callback>(callback)
+      , std::move(*this)
       );
     }
 

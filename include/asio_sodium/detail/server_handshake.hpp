@@ -45,9 +45,9 @@ namespace detail {
       }
 
       reenter (this) {
-        yield await_hello(socket_, std::move(*this));
+        yield await_hello();
         // TODO custom error_codes
-        if (!process_hello(authenticator_)) {
+        if (!process_hello()) {
           on_error_(ec, bytes);
           yield break;
         }
@@ -55,29 +55,24 @@ namespace detail {
           on_error_(ec, bytes);
           yield break;
         }
-        yield send_hello_response(
-          socket_
-        , std::move(*this)
-        );
+        yield send_hello_response();
         on_success_();
       }
     }
 
   private:
-    template <typename Callback>
     void
-    await_hello(socket_type& socket, Callback&& callback)
+    await_hello()
     noexcept {
       asio::async_read(
-        socket
+        socket_
       , asio::buffer(session_.hello_buffer)
-      , std::forward<Callback>(callback)
+      , std::move(*this)
       );
     }
 
-    template <typename Auth>
     bool
-    process_hello(Auth&& auth)
+    process_hello()
     noexcept {
       auto hello =
         handshake_hello::decrypt(
@@ -91,7 +86,7 @@ namespace detail {
       }
       auto public_key = hello->public_key_span();
       // Look up the public key and make sure it's authorized
-      if (!auth(public_key)) {
+      if (!authenticator_(public_key)) {
         return false;
       }
       std::copy(
@@ -135,15 +130,13 @@ namespace detail {
       return true;
     }
 
-    template <typename Callback> void
-    send_hello_response(
-      socket_type& socket, Callback&& callback
-    )
+    void
+    send_hello_response()
     noexcept {
       asio::async_write(
-        socket
+        socket_
       , asio::buffer(session_.hello_response_buffer)
-      , std::forward<Callback>(callback)
+      , std::move(*this)
       );
     }
 
