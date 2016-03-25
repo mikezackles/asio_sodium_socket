@@ -87,6 +87,11 @@ namespace detail {
       if (!auth(public_key)) {
         return false;
       }
+      std::copy(
+        public_key.begin()
+      , public_key.end()
+      , remote_public_key_.begin()
+      );
       hello->copy_reply_nonce(encrypt_nonce_);
       return true;
     }
