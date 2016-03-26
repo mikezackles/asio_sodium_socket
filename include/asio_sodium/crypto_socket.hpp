@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_101d0035_8812_49b9_9964_c98446206ed3
+#define ASIO_SODIUM_101d0035_8812_49b9_9964_c98446206ed3
 
 #include "detail/asio_types.hpp"
 #include "detail/client_handshake.hpp"
@@ -195,3 +196,5 @@ namespace asio_sodium {
     std::unique_ptr<movable_data> movable_;
   };
 }
+
+#endif

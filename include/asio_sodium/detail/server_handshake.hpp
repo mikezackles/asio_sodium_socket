@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_e50e3cf0_2e11_453d_bb1e_3f6ff09eca5d
+#define ASIO_SODIUM_e50e3cf0_2e11_453d_bb1e_3f6ff09eca5d
 
 #include "asio_types.hpp"
 #include "handshake_hello.hpp"
@@ -149,3 +150,5 @@ namespace detail {
     OnError on_error_;
   };
 }}
+
+#endif

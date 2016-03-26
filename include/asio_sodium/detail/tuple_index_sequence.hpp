@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_76c5499a_db79_4b00_bda0_69b00c0b5dc6
+#define ASIO_SODIUM_76c5499a_db79_4b00_bda0_69b00c0b5dc6
 
 namespace asio_sodium {
 namespace detail {
@@ -14,3 +15,5 @@ namespace detail {
     ;
   }
 }}
+
+#endif

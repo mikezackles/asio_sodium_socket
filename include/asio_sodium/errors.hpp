@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_f6555cd8_4c37_4476_8409_3eb29a80c8a7
+#define ASIO_SODIUM_f6555cd8_4c37_4476_8409_3eb29a80c8a7
 
 namespace asio_sodium {
   enum class error {
@@ -72,3 +73,5 @@ namespace std {
     : public std::true_type
   {};
 }
+
+#endif

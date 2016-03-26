@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_46c5462e_db6a_4c1d_904f_9b6966425e8a
+#define ASIO_SODIUM_46c5462e_db6a_4c1d_904f_9b6966425e8a
 
 #include "../errors.hpp"
 #include "asio_types.hpp"
@@ -128,3 +129,5 @@ namespace detail {
     OnError on_error_;
   };
 }}
+
+#endif

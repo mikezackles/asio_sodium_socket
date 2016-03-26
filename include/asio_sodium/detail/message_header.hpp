@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_4344f2d4_0557_403d_841c_9ba292025fd5
+#define ASIO_SODIUM_4344f2d4_0557_403d_841c_9ba292025fd5
 
 #include "../crypto.hpp"
 #include "endianness.hpp"
@@ -235,3 +236,5 @@ namespace detail {
     message_header_view view_;
   };
 }}
+
+#endif

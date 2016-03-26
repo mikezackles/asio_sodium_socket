@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_63f2103d_ba5b_4ebc_8b42_63e8d851cd08
+#define ASIO_SODIUM_63f2103d_ba5b_4ebc_8b42_63e8d851cd08
 
 #include "../errors.hpp"
 
@@ -146,3 +147,5 @@ namespace detail {
     uint32_t message_length_;
   };
 }}
+
+#endif

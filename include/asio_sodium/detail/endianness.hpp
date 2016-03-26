@@ -15,7 +15,8 @@
  * limitations under the License.
  */
 
-#pragma once
+#ifndef ASIO_SODIUM_894c8fe0_d50a_435f_8d32_eb2c8123a463
+#define ASIO_SODIUM_894c8fe0_d50a_435f_8d32_eb2c8123a463
 
 // The wire format uses a little endian encoding (since that's efficient for
 // the common platforms).
@@ -77,3 +78,5 @@ namespace detail {
     #endif
   }
 }}
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_8a4c094b_6c1f_40d5_acb8_7b1652a8fde6
+#define ASIO_SODIUM_8a4c094b_6c1f_40d5_acb8_7b1652a8fde6
 
 #include "../crypto.hpp"
 
@@ -183,3 +184,5 @@ namespace detail {
     handshake_response_view view_;
   };
 }}
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_777dbf21_f3d8_4d87_8a5b_208d2f9259fa
+#define ASIO_SODIUM_777dbf21_f3d8_4d87_8a5b_208d2f9259fa
 
 #include "handshake_hello.hpp"
 #include "handshake_response.hpp"
@@ -41,3 +42,5 @@ namespace detail {
     message_header::buffer header_buffer;
   };
 }}
+
+#endif

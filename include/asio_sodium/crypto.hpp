@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_75226a68_a8b1_4eba_839c_08df9c278729
+#define ASIO_SODIUM_75226a68_a8b1_4eba_839c_08df9c278729
 
 #include <array>
 #include <sodium.h>
@@ -15,3 +16,5 @@ namespace asio_sodium {
   using nonce_span = gsl::span<byte, crypto_box_NONCEBYTES>;
   using mac_span = gsl::span<byte, crypto_box_MACBYTES>;
 }
+
+#endif

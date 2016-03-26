@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ASIO_SODIUM_9c88c531_a60b_4d94_8a00_6205a1e29c10
+#define ASIO_SODIUM_9c88c531_a60b_4d94_8a00_6205a1e29c10
 
 #include "../errors.hpp"
 
@@ -132,3 +133,5 @@ namespace detail {
     Resumable resumable_;
   };
 }}
+
+#endif
