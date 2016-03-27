@@ -52,7 +52,7 @@ namespace detail {
     public_key local_public_key;
     // TODO - RAII wrapper to wipe this on destruct!
     private_key local_private_key;
-    mac mac;
+    message_authentication_code mac;
     handshake_hello::buffer hello_buffer;
     handshake_response::buffer hello_response_buffer;
     message_header::buffer header_buffer;

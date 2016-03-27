@@ -103,7 +103,7 @@ namespace detail {
       if (!hello) {
         return error::handshake_hello_decrypt;
       }
-      auto public_key = hello->public_key_span();
+      auto public_key = hello->client_public_key_span();
       // Look up the public key and make sure it's authorized
       if (!authenticator_(public_key)) {
         return error::handshake_authentication;

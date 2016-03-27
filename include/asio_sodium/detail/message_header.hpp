@@ -113,13 +113,15 @@ namespace detail {
     using optional = std::experimental::optional<T>;
     using buffer = std::array<byte, buffer_size>;
 
-    explicit message_header(
+    constexpr explicit
+    message_header(
       buffer& data
     ) noexcept
       : view_(gsl::as_span(data))
     {}
 
-    explicit message_header(
+    constexpr explicit
+    message_header(
       message_header_view view
     ) noexcept
       : view_(view)

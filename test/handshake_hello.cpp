@@ -45,7 +45,7 @@ SCENARIO("handshake hello encrypt/decrypt", "[integration]") {
     )
   ;
   REQUIRE( decrypted );
-  auto result_pk = decrypted->public_key_span();
+  auto result_pk = decrypted->client_public_key_span();
   REQUIRE(
     std::equal(
       result_pk.begin()

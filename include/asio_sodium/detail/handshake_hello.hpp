@@ -93,13 +93,15 @@ namespace detail {
     using optional = std::experimental::optional<T>;
     using buffer = std::array<byte, buffer_size>;
 
-    explicit handshake_hello(
+    constexpr explicit
+    handshake_hello(
       buffer& data
     ) noexcept
       : view_(gsl::as_span(data))
     {}
 
-    explicit handshake_hello(
+    constexpr explicit
+    handshake_hello(
       handshake_hello_view view
     ) noexcept
       : view_(view)
@@ -149,7 +151,7 @@ namespace detail {
     }
 
     constexpr public_key_span const
-    public_key_span() const noexcept {
+    client_public_key_span() const noexcept {
       return view_.public_key_field();
     }
 
