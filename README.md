@@ -20,7 +20,8 @@ bundled as submodules in the bundle directory. To use this library, just add the
 appropriate bundled include directories to your project along with the primary
 include directory. You will also need to install and link against libsodium.
 
-For a usage example, see the [socket test](test/socket.cpp).
+For a usage example, see the [socket test](test/socket.cpp). Note that this
+library only supports in-order transports (e.g. tcp or domain sockets).
 
 Tests
 -
@@ -35,6 +36,13 @@ To build and run the tests:
 
 ```shell
 gn gen out/release --args="is_debug=false"
+ninja -C out/release
+```
+
+The default build uses clang. To use gcc:
+
+```shell
+gn gen out/release --args="is_debug=false compiler=\"gcc\""
 ninja -C out/release
 ```
 
