@@ -11,7 +11,10 @@ config("base") {
   if (host_os != "mac") {
     ldflags += [ "-pthread" ]
   }
-  defines = [ "ASIO_SODIUM_TARGET_PLATFORM_$target_os" ]
+  defines = [
+    "ASIO_SODIUM_TARGET_PLATFORM_$target_os",
+    "ASIO_STANDALONE",
+  ]
   cflags = [
   ]
   if (is_clang) {
