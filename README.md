@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mikezackles/asio_sodium_socket.svg?branch=master)](https://travis-ci.org/mikezackles/asio_sodium_socket)
+
 asio_sodium_socket implements custom transport encryption using libsodium. It
 assumes pre-shared public keys and uses only the sealed box and crypto box
 constructs.

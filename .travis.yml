@@ -1,0 +1,17 @@
+sudo: required
+
+arch:
+  #repos:
+  packages:
+    # pacman packages
+    - python
+    - clang
+    - libsodium
+    - ninja
+    # aur packages
+    #- gn-git
+  script:
+    - "./travis_build.sh"
+
+script:
+  - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
