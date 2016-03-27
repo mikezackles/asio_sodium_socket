@@ -63,7 +63,6 @@ namespace detail {
 
       reenter (this) {
         yield await_hello();
-        // TODO custom error_codes
         ec = process_hello();
         if (ec) {
           on_error_(ec, bytes);
