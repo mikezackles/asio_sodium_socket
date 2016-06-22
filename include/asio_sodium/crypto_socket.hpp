@@ -25,7 +25,11 @@
 #include "detail/session_data.hpp"
 #include "detail/tuple_index_sequence.hpp"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
 #include <asio/basic_socket_acceptor.hpp>
+#pragma clang diagnostic pop
+
 #include <asio/io_service.hpp>
 
 namespace asio_sodium {

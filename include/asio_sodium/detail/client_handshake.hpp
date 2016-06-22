@@ -23,9 +23,17 @@
 #include "handshake_response.hpp"
 #include "session_data.hpp"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
 #include <asio/coroutine.hpp>
+#pragma clang diagnostic pop
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
 #include <asio/read.hpp>
 #include <asio/write.hpp>
+#pragma clang diagnostic pop
+
 #include <asio/yield.hpp>
 
 namespace asio_sodium {

@@ -22,9 +22,17 @@
 #include "asio_types.hpp"
 #include "message_header.hpp"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
 #include <asio/coroutine.hpp>
+#pragma clang diagnostic pop
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
 #include <asio/read.hpp>
 #include <asio/write.hpp>
+#pragma clang diagnostic pop
+
 #include <asio/yield.hpp>
 
 namespace asio_sodium {
@@ -142,7 +150,7 @@ namespace detail {
           &ciphertext[0]
         , &ciphertext[0]
         , &session_.mac[0]
-        , ciphertext.size()
+        , static_cast<std::size_t>(ciphertext.size())
         , &data_nonce[0]
         , &session_.remote_public_key[0]
         , &session_.local_private_key[0]

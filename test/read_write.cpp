@@ -20,7 +20,13 @@
 #include "asio_sodium/detail/message_writer.hpp"
 
 #include <asio/io_service.hpp>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
 #include <asio/ip/tcp.hpp>
+#pragma clang diagnostic pop
+
 #include <catch.hpp>
 #include <sodium.h>
 

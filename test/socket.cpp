@@ -18,7 +18,13 @@
 
 #include <asio/coroutine.hpp>
 #include <asio/io_service.hpp>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+#pragma clang diagnostic ignored "-Wunused-local-typedef"
 #include <asio/ip/tcp.hpp>
+#pragma clang diagnostic pop
+
 #include <asio/yield.hpp>
 #include <catch.hpp>
 #include <sodium.h>

@@ -19,8 +19,18 @@
 
 #include "../crypto.hpp"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundef"
 #include <asio/buffer.hpp>
+#pragma clang diagnostic pop
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-id-macro"
+#pragma clang diagnostic ignored "-Wextra-semi"
+#pragma clang diagnostic ignored "-Wweak-vtables"
+#pragma clang diagnostic ignored "-Wpadded"
 #include <optional.hpp>
+#pragma clang diagnostic pop
 
 namespace asio_sodium {
 namespace detail {

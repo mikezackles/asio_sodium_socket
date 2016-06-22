@@ -19,7 +19,12 @@
 
 #include <array>
 #include <sodium.h>
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wpadded"
+#pragma clang diagnostic ignored "-Wweak-vtables"
 #include <span.h>
+#pragma clang diagnostic pop
 
 namespace asio_sodium {
   using byte = unsigned char;
