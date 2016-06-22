@@ -61,8 +61,6 @@ namespace asio_sodium {
         return "Couldn't encrypt message";
       case error::message_decrypt:
         return "Couldn't decrypt message";
-      default:
-        return "No message for this error!";
       }
     }
   };
