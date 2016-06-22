@@ -59,7 +59,7 @@ namespace detail {
     data_span() noexcept { return view_.last<data_size>(); }
 
     auto
-    buffer() noexcept { return asio::buffer(&view_[0], view_.size()); }
+    buffer() noexcept { return asio::buffer(&view_[0], static_cast<std::size_t>(view_.size())); }
 
     constexpr public_key_span
     public_key_field() noexcept {
@@ -123,7 +123,7 @@ namespace detail {
         crypto_box_seal_open(
           &data_span[0]
         , &full_span[0]
-        , full_span.size()
+        , static_cast<std::size_t>(full_span.size())
         , &receiver_public_key[0]
         , &receiver_private_key[0]
         )
@@ -147,7 +147,7 @@ namespace detail {
     void
     generate_reply_nonce() noexcept {
       auto reply_nonce = view_.reply_nonce_field();
-      randombytes_buf(&reply_nonce[0], reply_nonce.size());
+      randombytes_buf(&reply_nonce[0], static_cast<std::size_t>(reply_nonce.size()));
     }
 
     constexpr public_key_span const
@@ -179,7 +179,7 @@ namespace detail {
         crypto_box_seal(
           &full_span[0]
         , &data_span[0]
-        , data_span.size()
+        , static_cast<std::size_t>(data_span.size())
         , &remote_key[0]
         )
         == 0
