@@ -38,6 +38,8 @@ namespace asio_sodium {
     char const* name() const noexcept override {
       return "asio_sodium errors";
     }
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wreturn-type"
     std::string message(int ev) const override {
       auto e = static_cast<error>(ev);
       switch (e) {
@@ -64,6 +66,7 @@ namespace asio_sodium {
       }
     }
   };
+#pragma GCC diagnostic pop
 
   inline
   std::error_category const&

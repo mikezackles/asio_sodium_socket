@@ -57,6 +57,8 @@ target_all_warnings_except(tests
   -Wno-implicit-fallthrough # asio coroutines
   -Wno-padded # TODO - REMOVE THIS!
   -Wno-shorten-64-to-32 # TODO REMOVE!
+  GCC
+  -Wno-unknown-pragmas
   )
 #set_property(TARGET tests APPEND_STRING PROPERTY COMPILE_FLAGS "-ferror-limit=2 ")
 
