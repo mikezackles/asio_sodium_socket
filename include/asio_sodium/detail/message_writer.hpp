@@ -26,6 +26,7 @@
 #include <asio/read.hpp>
 #include <asio/write.hpp>
 #include <asio/yield.hpp>
+#include <limits>
 
 namespace asio_sodium {
 namespace detail {
@@ -74,7 +75,12 @@ namespace detail {
       message_header header(session_.header_buffer);
       header.generate_data_nonce();
       header.generate_followup_nonce();
-      header.set_message_length(message_.length());
+
+      if (message_.length() > std::numeric_limits<uint32_t>::max()) {
+        return error::message_too_large;
+      } else {
+        header.set_message_length(static_cast<uint32_t>(message_.length()));
+      }
 
       auto data_nonce = header.data_nonce_span();
       if (

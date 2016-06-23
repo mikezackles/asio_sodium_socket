@@ -56,7 +56,6 @@ target_all_warnings_except(tests
   -Wno-weak-vtables # AFAIK there's not much to do about this one while remaining header-only
   -Wno-implicit-fallthrough # asio coroutines
   -Wno-padded # TODO - REMOVE THIS!
-  -Wno-shorten-64-to-32 # TODO REMOVE!
   GCC
   -Wno-unknown-pragmas
   )
