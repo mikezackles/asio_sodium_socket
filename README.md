@@ -20,30 +20,20 @@ bundled as submodules in the bundle directory. To use this library, just add the
 appropriate bundled include directories to your project along with the primary
 include directory. You will also need to install and link against libsodium.
 
+The included CMakeLists.txt specifies an interface for the `asio_sodium_socket`
+library, which should make things easier for cmake users. Note that if you'd
+like to use your own copies of the dependencies, the `ASIO_LOCATION`,
+`GSL_LOCATION`, and `OPTIONAL_LOCATION` cache variables are available.
+
 For a usage example, see the [socket test](test/socket.cpp). Note that this
 library only supports in-order transports (e.g. tcp or domain sockets).
 
-Tests
+Running the Tests
 -
 
-The project is currently built using the Chromium project's
-[Generate Ninja](https://chromium.googlesource.com/chromium/src/tools/gn/).
-There is a PKGBUILD for Arch Linux
-[here](https://github.com/mikezackles/gn-git). You will also need to install the
-[Ninja build system](https://ninja-build.org/).
-
-To build and run the tests:
-
 ```shell
-gn gen out/release --args="is_debug=false"
-ninja -C out/release
-```
-
-The default build uses clang. To use gcc:
-
-```shell
-gn gen out/release --args="is_debug=false compiler=\"gcc\""
-ninja -C out/release
+git clone --recursive git://github.com/mikezackles/asio_sodium_socket && cd asio_sodium_socket
+cmake . && make && ctest
 ```
 
 Authentication
@@ -65,8 +55,3 @@ variable-length message data. A message header contains the length of the
 following message data along with the random data nonce used to encrypt the
 message data and a random followup nonce that will be used to encrypt the next
 message header. The message length is sent in little-endian format.
-
-Notes
--
-
-With a bit of work, keys could be ratcheted with each transmission.
