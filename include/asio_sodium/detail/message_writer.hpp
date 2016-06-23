@@ -82,7 +82,7 @@ namespace detail {
           &message_[0]
         , &session_.mac[0]
         , &message_[0]
-        , message_.size()
+        , static_cast<std::size_t>(message_.size())
         , &data_nonce[0]
         , &session_.remote_public_key[0]
         , &session_.local_private_key[0]
@@ -138,7 +138,7 @@ namespace detail {
     noexcept {
       asio::async_write(
         socket_
-      , asio::buffer(&message_[0], message_.size())
+      , asio::buffer(&message_[0], static_cast<std::size_t>(message_.size()))
       , std::move(resumable_)
       );
     }
