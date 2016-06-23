@@ -10,3 +10,6 @@
 [submodule "bundle/core/optional"]
 	path = bundle/core/optional
 	url = git://github.com/akrzemi1/Optional
+[submodule "cmake"]
+	path = cmake
+	url = git://github.com/mikezackles/cmake_tools
