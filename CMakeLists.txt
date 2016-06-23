@@ -59,8 +59,8 @@ target_all_warnings_except(tests
   GCC
   -Wno-unknown-pragmas
   )
-#set_property(TARGET tests APPEND_STRING PROPERTY COMPILE_FLAGS "-ferror-limit=2 ")
 
 target_link_libraries(tests asio_sodium_socket)
 
+enable_testing()
 add_test(tests tests)
