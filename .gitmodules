@@ -1,6 +1,3 @@
-[submodule "build"]
-	path = build
-	url = git://github.com/mikezackles/gn_build
 [submodule "bundle/core/asio"]
 	path = bundle/core/asio
 	url = git://github.com/chriskohlhoff/asio
