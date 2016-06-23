@@ -4,14 +4,15 @@ arch:
   #repos:
   packages:
     # pacman packages
-    - python
+    - cmake
     - clang
     - libsodium
     - ninja
     # aur packages
-    #- gn-git
   script:
-    - "./travis_build.sh"
+    - "CXX=clang++ cmake -G Ninja -DCMAKE_BUILD_TYPE=Release"
+    - "ninja"
+    - "ctest"
 
 script:
   - "curl -s https://raw.githubusercontent.com/mikkeloscar/arch-travis/master/arch-travis.sh | bash"
