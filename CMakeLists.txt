@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(asio_sodium_socket VERSION 0.1 LANGUAGES CXX)
 
 include("${CMAKE_SOURCE_DIR}/cmake/target_all_warnings_except.cmake")
+include("${CMAKE_SOURCE_DIR}/cmake/target_use_modern_cxx.cmake")
 
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -27,13 +28,8 @@ target_include_directories(asio_sodium_socket
   "${GSL_LOCATION}/include"
   "${OPTIONAL_LOCATION}")
 target_link_libraries(asio_sodium_socket INTERFACE sodium ${CMAKE_THREAD_LIBS_INIT})
-get_property(cxx_features GLOBAL PROPERTY CMAKE_CXX_KNOWN_FEATURES)
-if (CMAKE_BUILD_TYPE STREQUAL "Release")
-  # TODO - whitelist features here if necessary
-  target_compile_features(asio_sodium_socket INTERFACE ${cxx_features})
-else()
-  target_compile_features(asio_sodium_socket INTERFACE ${cxx_features})
-endif()
+# TODO - whitelist features here if necessary
+target_use_modern_cxx(asio_sodium_socket TYPE INTERFACE)
 
 add_executable(tests
   "test/main.cpp"
@@ -55,7 +51,7 @@ target_all_warnings_except(tests
   -Wno-exit-time-destructors # catch
   -Wno-weak-vtables # AFAIK there's not much to do about this one while remaining header-only
   -Wno-implicit-fallthrough # asio coroutines
-  -Wno-padded # TODO - REMOVE THIS!
+  -Wno-padded
   GCC
   -Wno-unknown-pragmas
   )
